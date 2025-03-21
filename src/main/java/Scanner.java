@@ -23,7 +23,6 @@ public class Scanner {
                 LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
                 BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 
-                // Decode the QR code using ZXing
                 Result result = new MultiFormatReader().decode(bitmap);
 
                 // Return the decoded text
