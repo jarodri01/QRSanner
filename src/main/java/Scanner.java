@@ -7,7 +7,6 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 
 public class Scanner {
-
         /**
          * Reads a QR code from an image file and returns the text content.
          *
