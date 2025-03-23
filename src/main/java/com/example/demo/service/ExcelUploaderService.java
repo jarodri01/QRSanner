@@ -4,12 +4,9 @@ import com.example.demo.dto.DataInputRequest;
 import com.example.demo.model.DataRecord;
 import com.example.demo.repositories.DataRecordRepository;
 import org.springframework.stereotype.Service;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.Iterator;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,24 +17,30 @@ public class ExcelUploaderService {
         this.repository = repository;
     }
 
-    public void uploadExcel(File file) {
-        try (FileInputStream fis = new FileInputStream(file);
-             Workbook workbook = new XSSFWorkbook(fis)) {
+    public void uploadTxtFile(File file) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            List<DataRecord> records = new ArrayList<>();
 
-            Sheet sheet = workbook.getSheetAt(0);
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(","); // Assuming the .txt file uses CSV format
 
-            for (Row row : sheet) {
-                // Validate cell data before accessing it
-                if (row.getCell(0) != null && row.getCell(1) != null) {
+                // Create a DataRecord entity after validating fields
+                if (fields.length >= 2) {
                     DataRecord record = new DataRecord();
-                    record.setName(row.getCell(0).getStringCellValue());
-                    record.setQrCodeData(row.getCell(1).getStringCellValue());
-                    repository.save(record);
+                    record.setName(fields[0].trim());
+                    record.setQrCodeData(fields[1].trim());
+                    // Add additional fields as needed
+                    records.add(record);
                 }
             }
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to process the Excel file: " + e.getMessage(), e);
 
+            // Save all records to the H2 database
+            repository.saveAll(records);
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Log this error appropriately
+            throw new RuntimeException("Failed to process the .txt file: " + e.getMessage());
         }
     }
 
@@ -55,7 +58,6 @@ public class ExcelUploaderService {
         return repository.save(dataRecord);
     }
 
-    // Optional: Retrieve all data from the database for verification (useful for testing)
     public List<DataRecord> fetchAllData() {
         return repository.findAll();
     }

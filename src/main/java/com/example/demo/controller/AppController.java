@@ -40,7 +40,8 @@ public class AppController {
         return "/upload";
     }
 
-    @PostMapping("/api/data/add")
+
+    @PostMapping("/api/add/upload")
     public ResponseEntity<DataRecord> addData(@ModelAttribute DataInputRequest request) {
         System.out.println("Received DataInputRequest: " + request);
 
@@ -55,19 +56,19 @@ public class AppController {
         }
     }
 
-    @PostMapping("/api/excel/upload")
+    @PostMapping("/api/text/upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file, Model model) {
-        String path = "/api/excel/upload";
+        String path = "/api/text/upload";
         if (file.isEmpty()) {
             model.addAttribute("message", "Please select a file to upload.");
             return path;
         }
 
         try {
-            File tempFile = File.createTempFile("uploaded-", ".xlsx");
+            File tempFile = File.createTempFile("uploaded-", ".txt");
             file.transferTo(tempFile);
 
-            excelUploaderService.uploadExcel(tempFile);
+            excelUploaderService.uploadTxtFile(tempFile);
             model.addAttribute("message", "File uploaded successfully!");
 
         } catch (IOException e) {
