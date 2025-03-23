@@ -42,8 +42,17 @@ public class AppController {
 
     @PostMapping("/api/data/add")
     public ResponseEntity<DataRecord> addData(@ModelAttribute DataInputRequest request) {
+        System.out.println("Received DataInputRequest: " + request);
+
         DataRecord savedData = excelUploaderService.addManualData(request);
-        return new ResponseEntity<>(savedData, HttpStatus.CREATED);
+
+        if (savedData != null) {
+            System.out.println("Saved Record: " + savedData);
+
+            return new ResponseEntity<>(savedData, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/api/excel/upload")
@@ -68,7 +77,6 @@ public class AppController {
 
         return path;
     }
-
 
     @GetMapping("/scan")
     public String scanPage() {

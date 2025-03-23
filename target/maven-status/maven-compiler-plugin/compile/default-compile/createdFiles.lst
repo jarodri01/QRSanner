@@ -1,0 +1,8 @@
+com/example/demo/controller/AppController.class
+com/example/demo/service/ExcelUploaderService.class
+com/example/demo/TicketScannerApplication.class
+com/example/demo/model/DataRecord.class
+com/example/demo/dto/DataInputRequest.class
+com/example/demo/repositories/DataRecordRepository.class
+com/example/demo/service/ScannerService.class
+com/example/demo/service/QRCodeGeneratorService.class

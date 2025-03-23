@@ -1,0 +1,8 @@
+/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/service/ExcelUploaderService.java
+/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/TicketScannerApplication.java
+/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/service/QRCodeGeneratorService.java
+/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/model/DataRecord.java
+/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/dto/DataInputRequest.java
+/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/repositories/DataRecordRepository.java
+/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/controller/AppController.java
+/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/service/ScannerService.java

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Scan QR Code</title>
+</head>
+<body>
+<h1>Scan QR Code</h1>
+<form action="/scan" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".png,.jpg,.jpeg">
+    <button type="submit">Scan</button>
+</form>
+<p th:text="${message}"></p>
+<p th:if="${result != null}" th:text="'QR Code Data: ' + ${result}"></p>
+<p th:if="${matchMessage != null}" th:text="${matchMessage}"></p>
+</body>
+</html>

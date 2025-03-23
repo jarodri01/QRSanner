@@ -6,6 +6,7 @@ import com.example.demo.repositories.DataRecordRepository;
 import org.springframework.stereotype.Service;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Iterator;
@@ -26,26 +27,31 @@ public class ExcelUploaderService {
             Sheet sheet = workbook.getSheetAt(0);
 
             for (Row row : sheet) {
-                DataRecord record = new DataRecord();
-                record.setName(row.getCell(0).getStringCellValue());
-                record.setQrCodeData(row.getCell(1).getStringCellValue());
-                repository.save(record);
+                // Validate cell data before accessing it
+                if (row.getCell(0) != null && row.getCell(1) != null) {
+                    DataRecord record = new DataRecord();
+                    record.setName(row.getCell(0).getStringCellValue());
+                    record.setQrCodeData(row.getCell(1).getStringCellValue());
+                    repository.save(record);
+                }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to process the Excel file: " + e.getMessage(), e);
+
         }
     }
 
     public DataRecord addManualData(DataInputRequest request) {
-        // Convert the DTO to the entity class
+        if (request == null || request.getName() == null || request.getQrCodeData() == null) {
+            throw new IllegalArgumentException("Invalid request: Name and QR Code Data are required.");
+        }
         DataRecord dataRecord = new DataRecord();
-        dataRecord.setId(request.getId());
+
         dataRecord.setQrCodeData(request.getQrCodeData());
         dataRecord.setName(request.getName());
         dataRecord.setNumberOfTickets(request.getNumberOfTickets());
         dataRecord.setPaid(request.isPaid());
 
-        // Save the record into the database
         return repository.save(dataRecord);
     }
 

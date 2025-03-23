@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Generate QR Codes</title>
+</head>
+<body>
+<h1>Generate QR Codes</h1>
+<form action="/generate" method="post">
+    <button type="submit">Generate QR Code PDF</button>
+</form>
+<p th:text="${message}"></p>
+</body>
+</html>
