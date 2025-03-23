@@ -7,6 +7,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="TicketScanner" value="6fa38818-d40f-4f6f-bc48-a34cf00c7abb" />
+          <factory-entry name="entityManagerFactory" value="ef8e9832-a3ea-4952-b255-e511ce9b51da" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

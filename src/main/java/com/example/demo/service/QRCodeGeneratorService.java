@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-
 import com.example.demo.model.DataRecord;
 import com.example.demo.repositories.DataRecordRepository;
 import com.google.zxing.*;
@@ -11,6 +10,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.awt.image.BufferedImage;
@@ -20,23 +20,33 @@ import java.util.List;
 @Service
 public class QRCodeGeneratorService {
     private final DataRecordRepository repository;
-
+    @Value("${pdf.output.path}")
+    private String pdfOutputPath;
     public QRCodeGeneratorService(DataRecordRepository repository) {
         this.repository = repository;
     }
 
     public void generateQRCodePDF(String pdfPath) throws Exception {
         List<DataRecord> records = repository.findAll();
+        if (records == null || records.isEmpty()) {
+            System.out.println("No records found in the database. Skipping QR Code generation.");
+            return;
+        }
+
         PDDocument document = new PDDocument();
-
         for (DataRecord record : records) {
-            BufferedImage qrImage = generateQRCodeImage(record.getQrCodeData());
+            String qrData = record.getQrCodeData();
+            if (qrData == null || qrData.isEmpty()) {
+                System.out.println("Skipping record with empty QR code data.");
+                continue;
+            }
 
+            BufferedImage qrImage = generateQRCodeImage(qrData);
             PDPage page = new PDPage();
             document.addPage(page);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            MatrixToImageWriter.writeToStream(toBitMatrix(record.getQrCodeData()), "PNG", baos);
+            MatrixToImageWriter.writeToStream(toBitMatrix(qrData), "PNG", baos);
 
             PDImageXObject image = PDImageXObject.createFromByteArray(document, baos.toByteArray(), "QR Code");
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
@@ -45,7 +55,13 @@ public class QRCodeGeneratorService {
             contentStream.close();
         }
 
-        document.save(pdfPath);
+        if (document.getNumberOfPages() > 0) {
+            document.save(pdfPath);
+            System.out.println("QR Code PDF successfully generated: " + pdfPath);
+        } else {
+            System.out.println("No QR codes were generated as no valid records were found.");
+        }
+
         document.close();
     }
 

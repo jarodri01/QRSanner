@@ -1,10 +1,15 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.DataInputRequest;
+import com.example.demo.model.DataRecord;
 import com.example.demo.service.ExcelUploaderService;
 import com.example.demo.service.QRCodeGeneratorService;
 import com.example.demo.service.ScannerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 
+@Service
 @Controller
 public class AppController {
 
@@ -31,14 +37,21 @@ public class AppController {
 
     @GetMapping("/upload")
     public String uploadPage() {
-        return "upload";
+        return "/upload";
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/api/data/add")
+    public ResponseEntity<DataRecord> addData(@ModelAttribute DataInputRequest request) {
+        DataRecord savedData = excelUploaderService.addManualData(request);
+        return new ResponseEntity<>(savedData, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/api/excel/upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file, Model model) {
+        String path = "/api/excel/upload";
         if (file.isEmpty()) {
             model.addAttribute("message", "Please select a file to upload.");
-            return "upload";
+            return path;
         }
 
         try {
@@ -53,7 +66,7 @@ public class AppController {
             model.addAttribute("message", "Failed to upload the file.");
         }
 
-        return "upload";
+        return path;
     }
 
 
@@ -106,13 +119,12 @@ public class AppController {
     public String handleQRCodeGeneration(Model model) {
         try {
             qrCodeGeneratorService.generateQRCodePDF("output/qrcodes.pdf");
-            model.addAttribute("message", "QR Codes successfully generated in PDF: output/qrcodes.pdf.");
-
+            model.addAttribute("message", "QR Code generation process completed. Check logs for details.");
         } catch (Exception e) {
-            e.printStackTrace(); // why is this yellow too.
-            model.addAttribute("message", "Failed to generate QR Code PDF.");
+            e.printStackTrace();
+            model.addAttribute("message", "Failed to generate QR Code PDF: " + e.getMessage());
         }
-
         return "generate";
     }
+
 }

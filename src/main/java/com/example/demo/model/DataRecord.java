@@ -1,15 +1,22 @@
 package com.example.demo.model;
 
-
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "data_record")
 public class DataRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "NUMBER_OF_TICKETS")
+    private int numberOfTickets;
+
+    private boolean paid;
+
     private String name;
+
+    @Column(name = "QRCODEDATA")
     private String qrCodeData;
 
     public Long getId() {
@@ -22,6 +29,18 @@ public class DataRecord {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setNumberOfTickets(int numberOfTickets) {
+        this.numberOfTickets = numberOfTickets;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
     }
 
     public void setName(String name) {
