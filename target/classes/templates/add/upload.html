@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text file Uploader and Data Input</title>
+</head>
+<body>
+<h1>Text file Uploader and Manual Data Entry</h1>
+
+<!-- Form to upload Excel file -->
+<h2>Upload Text File</h2>
+<form action="upload" method="post" enctype="multipart/form-data">
+  <label for="file">Choose Excel File:</label>
+  <input type="file" id="file" name="file" required>
+  <button type="submit">Upload</button>
+</form>
+<p th:text="${message}"></p>
+<hr>
+
+<!-- Form to manually input data -->
+<h2>Manual Data Entry Form</h2>
+<form action="/upload" method="post">
+
+  <label for="qrCodeData">QR CODE:</label>
+  <input type="text" id="qrCodeData" name="qrCodeData" required><br><br>
+
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required><br><br>
+
+  <label for="numberOfTickets">Number of Tickets:</label>
+  <input type="number" id="numberOfTickets" name="numberOfTickets" required><br><br>
+
+  <label for="paid">Paid:</label>
+  <select id="paid" name="paid" required>
+    <option value="true">Yes</option>
+    <option value="false">No</option>
+  </select><br><br>
+
+  <button type="submit">Save Data</button>
+</form>
+</body>
+</html>

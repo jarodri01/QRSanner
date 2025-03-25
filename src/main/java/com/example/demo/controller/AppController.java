@@ -35,13 +35,13 @@ public class AppController {
         return "index";
     }
 
-    @GetMapping("/upload")
+    @GetMapping("/add/upload")
     public String uploadPage() {
-        return "/upload";
+        return "/add/upload";
     }
 
 
-    @PostMapping("/api/add/upload")
+    @PostMapping("/upload")
     public ResponseEntity<DataRecord> addData(@ModelAttribute DataInputRequest request) {
         System.out.println("Received DataInputRequest: " + request);
 
@@ -56,9 +56,9 @@ public class AppController {
         }
     }
 
-    @PostMapping("/api/text/upload")
+    @PostMapping("/add/upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file, Model model) {
-        String path = "/api/text/upload";
+        String path = "/add/upload";
         if (file.isEmpty()) {
             model.addAttribute("message", "Please select a file to upload.");
             return path;
@@ -72,7 +72,7 @@ public class AppController {
             model.addAttribute("message", "File uploaded successfully!");
 
         } catch (IOException e) {
-            e.printStackTrace(); //why is this yellow
+            e.printStackTrace();
             model.addAttribute("message", "Failed to upload the file.");
         }
 
