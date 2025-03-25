@@ -3,12 +3,52 @@
 <head>
     <title>QR Code App</title>
 </head>
+<style>
+    /* Create a styled box */
+    .link-box {
+        width: 300px;
+        height: 100px;
+        border: 2px solid #4CAF50; /* Green border */
+        border-radius: 10px; /* Rounded corners */
+        text-align: center; /* Center text horizontally */
+        display: flex; /* Use flexbox for alignment */
+        justify-content: center; /* Center content horizontally */
+        align-items: center; /* Center content vertically */
+        background-color: #f9f9f9; /* Light background */
+        margin: 20px auto; /* Center box on the page */
+        font-family: Arial, sans-serif; /* Font style */
+    }
+
+    /* Styling for the link */
+    .link-box a {
+        text-decoration: none; /* Remove underline */
+        color: #4CAF50; /* Green text */
+        font-size: 18px; /* Font size */
+        font-weight: bold; /* Bold font */
+    }
+
+    /* Emoji with spacing */
+    .emoji {
+        font-size: 24px; /* Bigger emoji */
+        margin-right: 10px; /* Space between emoji and link */
+    }
+
+    /* Link hover effects */
+    .link-box a:hover {
+        color: #1E88E5; /* Change color on hover */
+    }
+</style>
+
 <body>
 <h1>Welcome to the QR Code App</h1>
 <ul>
-    <li><a th:href="@{/upload}">Upload Text File</a></li>
-    <li><a th:href="@{/scan}">Scan QR Code</a></li>
-    <li><a th:href="@{/generate}">Generate QR Code PDF</a></li>
+    <div><a class="link-box" th:href="@{/add/upload}" target="_blank">
+        <span class="emoji">&#128195;</span>
+        Upload Text File</a></div>
+    <div><a class="link-box" th:href="@{/scan}" target="_blank"><span class="emoji">&#128248;</span>
+        Scan QR Code</a></div>
+    <div><a class="link-box" th:href="@{/generate}" target="_blank"><span class="emoji">&#x25A3;</span>
+        Generate QR Code PDF</a></div>
 </ul>
 </body>
 </html>
