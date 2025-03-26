@@ -11,16 +11,17 @@
         gap: 8px; /* Space between the emoji and text */
         font-family: Arial, sans-serif; /* Font for the container */
     }
+
     .inline-container a {
-          text-decoration: none; /* Remove underline */
-          color: #4CAF50; /* Green text color */
-          font-size: 18px;
-          font-weight: bold; /* Bold font */
-      }
+        text-decoration: none; /* Remove underline */
+        color: Violet; /* Green text color */
+        font-size: 18px;
+        font-weight: bold; /* Bold font */
+    }
 
     /* Hover effect for the link */
     .inline-container a:hover {
-        color: #1E88E5; /* Change link color on hover */
+        color: Yellow; /* Change link color on hover */
     }
 
 
@@ -28,13 +29,13 @@
     .link-box {
         width: 100px;
         height: 100px;
-        border: 2px solid #4CAF50; /* Green border */
+        border: 2px solid Violet; /* Green border */
         border-radius: 10px; /* Rounded corners */
         text-align: center; /* Center text horizontally */
         display: flex; /* Use flexbox for alignment */
         justify-content: center; /* Center content horizontally */
         align-items: center; /* Center content vertically */
-        background-color: #f9f9f9; /* Light background */
+        background-color: LightGray; /* Light background */
         margin: 20px auto; /* Center box on the page */
         font-family: Arial, sans-serif; /* Font style */
     }
@@ -49,7 +50,7 @@
 
     /* Link hover effects */
     .link-box a:hover {
-        color: #1E88E5; /* Change color on hover */
+        color: Yellow; /* Change color on hover */
     }
 </style>
 
@@ -59,15 +60,15 @@
     <div class="inline-container"
     ><a class="link-box" th:href="@{/add/upload}" target="_blank">
         <i style="font-size:36px" class="fa">&#xf151;</i>
-        </a></div>
+    </a></div>
     <div class="inline-container"
     ><a class="link-box" th:href="@{/scan}" target="_blank">
         <i style="font-size:36px" class="fa">&#xf083;</i>
-        </a></div>
+    </a></div>
     <div class="inline-container"
     ><a class="link-box" th:href="@{/generate}" target="_blank">
         <i style="font-size:36px" class="fa">&#xf029;</i>
-       </a></div>
+    </a></div>
 </ul>
 </body>
 </html>
