@@ -2,11 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>QR Code App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <style>
+    .inline-container {
+        display: inline-flex; /* Flexbox that keeps items inline */
+        align-items: center; /* Vertically align items */
+        gap: 8px; /* Space between the emoji and text */
+        font-family: Arial, sans-serif; /* Font for the container */
+    }
+
+    .inline-container a {
+        text-decoration: none; /* Remove underline */
+        color: #4CAF50; /* Green text color */
+        font-size: 18px;
+        font-weight: bold; /* Bold font */
+    }
+
+    /* Hover effect for the link */
+    .inline-container a:hover {
+        color: #1E88E5; /* Change link color on hover */
+    }
+
+
     /* Create a styled box */
     .link-box {
-        width: 300px;
+        width: 100px;
         height: 100px;
         border: 2px solid #4CAF50; /* Green border */
         border-radius: 10px; /* Rounded corners */
@@ -27,12 +48,6 @@
         font-weight: bold; /* Bold font */
     }
 
-    /* Emoji with spacing */
-    .emoji {
-        font-size: 24px; /* Bigger emoji */
-        margin-right: 10px; /* Space between emoji and link */
-    }
-
     /* Link hover effects */
     .link-box a:hover {
         color: #1E88E5; /* Change color on hover */
@@ -42,13 +57,18 @@
 <body>
 <h1>Welcome to the QR Code App</h1>
 <ul>
-    <div><a class="link-box" th:href="@{/add/upload}" target="_blank">
-        <span class="emoji">&#128195;</span>
-        Upload Text File</a></div>
-    <div><a class="link-box" th:href="@{/scan}" target="_blank"><span class="emoji">&#128248;</span>
-        Scan QR Code</a></div>
-    <div><a class="link-box" th:href="@{/generate}" target="_blank"><span class="emoji">&#x25A3;</span>
-        Generate QR Code PDF</a></div>
+    <div class="inline-container"
+    ><a class="link-box" th:href="@{/add/upload}" target="_blank">
+        <i style="font-size:36px" class="fa">&#xf151;</i>
+    </a></div>
+    <div class="inline-container"
+    ><a class="link-box" th:href="@{/scan}" target="_blank">
+        <i style="font-size:36px" class="fa">&#xf083;</i>
+    </a></div>
+    <div class="inline-container"
+    ><a class="link-box" th:href="@{/generate}" target="_blank">
+        <i style="font-size:36px" class="fa">&#xf029;</i>
+    </a></div>
 </ul>
 </body>
 </html>
