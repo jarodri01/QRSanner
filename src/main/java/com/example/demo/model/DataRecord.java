@@ -44,14 +44,17 @@ public class DataRecord {
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 
     public String getQrCodeData() {
+
         return qrCodeData;
     }
 
     public void setQrCodeData(String qrCodeData) {
+
         this.qrCodeData = qrCodeData;
     }
 }

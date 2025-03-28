@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.List;
 
 @Service
@@ -22,11 +23,21 @@ public class QRCodeGeneratorService {
     private final DataRecordRepository repository;
     @Value("${pdf.output.path}")
     private String pdfOutputPath;
+
     public QRCodeGeneratorService(DataRecordRepository repository) {
         this.repository = repository;
     }
-
     public void generateQRCodePDF(String pdfPath) throws Exception {
+        // Ensure the directory exists or create it.
+        File pdfFile = new File(pdfPath);
+        File parentDir = pdfFile.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            boolean isDirCreated = parentDir.mkdirs();
+            if (!isDirCreated) {
+                throw new Exception("Failed to create directory: " + parentDir.getAbsolutePath());
+            }
+        }
+
         List<DataRecord> records = repository.findAll();
         if (records == null || records.isEmpty()) {
             System.out.println("No records found in the database. Skipping QR Code generation.");

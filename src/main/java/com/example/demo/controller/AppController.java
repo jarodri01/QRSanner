@@ -21,14 +21,17 @@ import java.io.IOException;
 @Controller
 public class AppController {
 
-    @Autowired
-    private ExcelUploaderService excelUploaderService;
+    private final ExcelUploaderService excelUploaderService;
 
-    @Autowired
-    private ScannerService scannerService;
+    private final ScannerService scannerService;
 
-    @Autowired
-    private QRCodeGeneratorService qrCodeGeneratorService;
+    private final QRCodeGeneratorService qrCodeGeneratorService;
+
+    public AppController(ExcelUploaderService excelUploaderService, ScannerService scannerService, QRCodeGeneratorService qrCodeGeneratorService) {
+        this.excelUploaderService = excelUploaderService;
+        this.scannerService = scannerService;
+        this.qrCodeGeneratorService = qrCodeGeneratorService;
+    }
 
     @GetMapping("/")
     public String index() {

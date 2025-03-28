@@ -1,73 +1,161 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .hero-image {
+            height: 50%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url("/images/MP_banner_general1.jpg");
+            height: 50%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+
+        }
+
+        .hero-text {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+
+        .hero-text button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 10px 25px;
+            color: black;
+            background-color: #ddd;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .hero-text button:hover {
+            background-color: #555;
+            color: white;
+        }
+        .inline-container {
+            display: inline-flex; /* Flexbox that keeps items inline */
+            align-items: center; /* Vertically align items */
+            gap: 8px; /* Space between the emoji and text */
+            font-family: Arial, sans-serif; /* Font for the container */
+            justify-content: space-around;
+            flex: 1; /* Optional: Makes all <li> items grow/shrink evenly if needed */
+            text-align: center;
+
+        }
+
+        .inline-container a {
+            text-decoration: none; /* Remove underline */
+            color: Violet; /* Green text color */
+            font-size: 18px;
+            font-weight: bold; /* Bold font */
+        }
+
+        /* Hover effect for the link */
+        .inline-container a:hover {
+            color: Yellow; /* Change link color on hover */
+        }
+
+        .ul {
+            list-style-type: none;
+            margin: 10px 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            justify-content: space-evenly; /* Distribute evenly, including space at the edges */
+
+
+        }
+
+
+        /* Create a styled box */
+        .link-box {
+            width: 100px;
+            height: 100px;
+            border: 2px solid Violet; /* Green border */
+            border-radius: 10px; /* Rounded corners */
+            text-align: center; /* Center text horizontally */
+            display: flex; /* Use flexbox for alignment */
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+            background-color: white; /* Light background */
+            margin: 20px auto; /* Center box on the page */
+            font-family: Arial, sans-serif; /* Font style */
+            position: relative;
+        }
+        .circle {
+            width: 65px; /* Circle size */
+            height: 65px; /* Circle size */
+            border-radius: 50%; /* Makes it a circle */
+            background-color: rebeccapurple; /* Circle color */
+            position: absolute; /* Allows positioning within the box */
+            top: 50%; /* Centers vertically */
+            left: 50%; /* Centers horizontally */
+            transform: translate(-50%, -50%); /* Fine-tune centering */
+
+        }
+        /* Styling for the link */
+        .link-box i {
+            text-decoration: none;
+            font-size: 30px;
+            position: relative;
+            border-top: 1rem solid transparent;
+            border-bottom: 2rem solid transparent;
+
+        }
+
+        /* Link hover effects */
+        .link-box a:hover {
+            color: Yellow; /* Change color on hover */
+        }
+    </style>
     <title>QR Code App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<style>
-    .inline-container {
-        display: inline-flex; /* Flexbox that keeps items inline */
-        align-items: center; /* Vertically align items */
-        gap: 8px; /* Space between the emoji and text */
-        font-family: Arial, sans-serif; /* Font for the container */
-    }
 
-    .inline-container a {
-        text-decoration: none; /* Remove underline */
-        color: Violet; /* Green text color */
-        font-size: 18px;
-        font-weight: bold; /* Bold font */
-    }
-
-    /* Hover effect for the link */
-    .inline-container a:hover {
-        color: Yellow; /* Change link color on hover */
-    }
-
-
-    /* Create a styled box */
-    .link-box {
-        width: 100px;
-        height: 100px;
-        border: 2px solid Violet; /* Green border */
-        border-radius: 10px; /* Rounded corners */
-        text-align: center; /* Center text horizontally */
-        display: flex; /* Use flexbox for alignment */
-        justify-content: center; /* Center content horizontally */
-        align-items: center; /* Center content vertically */
-        background-color: LightGray; /* Light background */
-        margin: 20px auto; /* Center box on the page */
-        font-family: Arial, sans-serif; /* Font style */
-    }
-
-    /* Styling for the link */
-    .link-box a {
-        text-decoration: none; /* Remove underline */
-        color: #4CAF50; /* Green text */
-        font-size: 18px; /* Font size */
-        font-weight: bold; /* Bold font */
-    }
-
-    /* Link hover effects */
-    .link-box a:hover {
-        color: Yellow; /* Change color on hover */
-    }
-</style>
 
 <body>
-<h1>Welcome to the QR Code App</h1>
-<ul>
+<div class="hero-image">
+    <div class="hero-text">
+        <h1 style="font-size:50px">Welcome to the QR Code App</h1>
+        <p>I am a web designer </p>
+        <button>Hire me</button></div>
+    </div>
+<ul class="ul">
     <div class="inline-container"
     ><a class="link-box" th:href="@{/add/upload}" target="_blank">
-        <i style="font-size:36px" class="fa">&#xf151;</i>
+        <div class="circle">
+        <i style="font-size:36px" class="fa">&#xf151;</i></div>
     </a></div>
     <div class="inline-container"
     ><a class="link-box" th:href="@{/scan}" target="_blank">
-        <i style="font-size:36px" class="fa">&#xf083;</i>
+        <div class="circle">
+            <i style="font-size:36px" class="fa">&#xf083;</i></div>
     </a></div>
     <div class="inline-container"
     ><a class="link-box" th:href="@{/generate}" target="_blank">
-        <i style="font-size:36px" class="fa">&#xf029;</i>
+        <div class="circle">
+            <i style="font-size:36px" class="fa">&#xf029;</i></div>
     </a></div>
 </ul>
 </body>
