@@ -87,6 +87,7 @@ public class AppController {
         return "scan";
     }
 
+
     @PostMapping("/scan")
     public String handleQRCodeScan(@RequestParam("file") MultipartFile file, Model model) {
         if (file.isEmpty()) {
