@@ -9,9 +9,9 @@ public class DataRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    //@Column(name = "NUMBER_OF_TICKETS")
     private int numberOfTickets;
     private boolean paid;
+    private String email;
     @Column(name = "QRCODEDATA")
     private String qrCodeData;
 
@@ -27,6 +27,16 @@ public class DataRecord {
         return name;
     }
 
+
+    public String getEmail() {
+
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public boolean isPaid() {
         return paid;
     }
@@ -36,6 +46,7 @@ public class DataRecord {
     }
 
     public void setNumberOfTickets(int numberOfTickets) {
+
         this.numberOfTickets = numberOfTickets;
     }
 

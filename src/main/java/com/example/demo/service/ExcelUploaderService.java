@@ -30,6 +30,10 @@ public class ExcelUploaderService {
                     DataRecord record = new DataRecord();
                     record.setName(fields[0].trim());
                     record.setQrCodeData(fields[1].trim());
+                    record.setNumberOfTickets(Integer.parseInt(fields[2].trim()));
+                    record.setPaid(Boolean.parseBoolean(fields[3].trim()));
+                    record.setEmail(fields[4].trim());
+
                     // Add additional fields as needed
                     records.add(record);
                 }
@@ -54,6 +58,7 @@ public class ExcelUploaderService {
         dataRecord.setName(request.getName());
         dataRecord.setNumberOfTickets(request.getNumberOfTickets());
         dataRecord.setPaid(request.isPaid());
+        dataRecord.setEmail(request.getEmail());
 
         return repository.save(dataRecord);
     }

@@ -7,6 +7,7 @@ public class DataInputRequest {
     private int numberOfTickets;
     private boolean paid;
     private String qrCodeData;
+    private String email;
 
     // Getters and Setters
     public Long getId() {
@@ -19,6 +20,14 @@ public class DataInputRequest {
 
     public String getName() {
         return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setName(String name) {
@@ -48,5 +57,7 @@ public class DataInputRequest {
     public void setPaid(boolean paid) {
         this.paid = paid;
     }
+
+
 }
 

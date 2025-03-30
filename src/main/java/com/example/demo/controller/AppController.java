@@ -96,7 +96,7 @@ public class AppController {
         }
 
         try {
-            File tempFile = File.createTempFile("qr-scan-", ".png");
+            File tempFile = File.createTempFile("qr-scan-", ".pdf");
             file.transferTo(tempFile);
 
             String result = scannerService.scanQRCode(tempFile);
