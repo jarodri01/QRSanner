@@ -19,7 +19,7 @@
 
         .hero-image {
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url("/images/MP_banner_general1.jpg");
+            url("/images/MP_banner_general1.jpg");
             height: 50%;
             background-position: center;
             background-repeat: no-repeat;
@@ -27,6 +27,7 @@
             position: relative;
 
         }
+
 
         .hero-text {
             text-align: center;
@@ -52,6 +53,7 @@
             background-color: #555;
             color: white;
         }
+
         .inline-container {
             display: inline-flex; /* Flexbox that keeps items inline */
             align-items: center; /* Vertically align items */
@@ -103,6 +105,7 @@
             font-family: Arial, sans-serif; /* Font style */
             position: relative;
         }
+
         .circle {
             width: 65px; /* Circle size */
             height: 65px; /* Circle size */
@@ -114,6 +117,7 @@
             transform: translate(-50%, -50%); /* Fine-tune centering */
 
         }
+
         /* Styling for the link */
         .link-box i {
             text-decoration: none;
@@ -139,13 +143,14 @@
     <div class="hero-text">
         <h1 style="font-size:50px">Welcome to the QR Code App</h1>
         <p>I am a web designer </p>
-        <button>Hire me</button></div>
+        <button>Hire me</button>
     </div>
+</div>
 <ul class="ul">
     <div class="inline-container"
     ><a class="link-box" th:href="@{/add/upload}" target="_blank">
         <div class="circle">
-        <i style="font-size:36px" class="fa">&#xf151;</i></div>
+            <i style="font-size:36px" class="fa">&#xf151;</i></div>
     </a></div>
     <div class="inline-container"
     ><a class="link-box" th:href="@{/scan}" target="_blank">
