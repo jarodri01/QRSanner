@@ -8,29 +8,25 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.util.Optional;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-
 @Service
 public class ScannerService {
 
-    private final DataRecordRepository repository;
+    public final DataRecordRepository repository;
 
     public ScannerService(DataRecordRepository repository) {
         this.repository = repository;
     }
 
-    public String scanQRCode(File file) {
+    public String scanQRCode(BufferedImage file) {
         try {
             // Load the image file
-            BufferedImage bufferedImage = ImageIO.read(file);
+            BufferedImage bufferedImage = ImageIO.read((ImageInputStream) file);
 
             // Convert the image to binary for QR Code decoding
             LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);

@@ -1,7 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Scan QR Code</title>
+    <style>
+        #result {
+            padding: 20px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .status-paid {
+            color: green;
+            font-weight: bold;
+        }
+        .status-not-paid {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+
+
 </head>
 <body>
 <h1>Scan QR Code</h1>
@@ -12,5 +30,86 @@
 <p th:text="${message}"></p>
 <p th:if="${result != null}" th:text="'QR Code Data: ' + ${result}"></p>
 <p th:if="${matchMessage != null}" th:text="${matchMessage}"></p>
+
+<!-- Div for QR Code scanning -->
+<div id="reader" style="width: 500px;"></div>
+<br>
+<button id="stop-camera">Stop Camera</button>
+
+<!-- Div to show scanning results -->
+<div id="result"></div>
+
+<!-- Script loading -->
+<!-- QR code reader library -->
+<script>
+    // Define the URL for the QR Code library script
+    const QR_CODE_SCRIPT_URL = "https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js";
+</script>
+<script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+
+<script>
+    const qrCodeReader = new Html5Qrcode("reader");
+
+    function startScanning() {
+        qrCodeReader.start(
+            { facingMode: "environment" }, // Use the back camera
+            {
+                fps: 10,       // Scans per second
+                qrbox: 250     // Size of scanning box
+            },
+            qrCodeMessage => {
+                // Call the backend API upon QR code detection
+                fetch('/api/qrscanner/scan', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ qrCodeData: qrCodeMessage })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        const resultDiv = document.getElementById('result');
+
+                        if (data.success) {
+                            // Display user details
+                            resultDiv.innerHTML = `
+                                <p>Name: ${data.name}</p>
+                                <p>Email: ${data.email}</p>
+                                <p>Number of Tickets: ${data.numberOfTickets}</p>
+                                <p class="${data.paid ? 'status-paid' : 'status-not-paid'}">
+                                    ${data.paid ? 'Payment Status: OK (Paid)' : 'Payment Status: Not Paid'}
+                                </p>
+                            `;
+                        } else {
+                            resultDiv.innerHTML = `<p class="status-not-paid">${data.message}</p>`;
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            },
+            errorMessage => {
+                console.warn(`QR Code scanning error: ${errorMessage}`);
+            }
+        )
+            .catch(err => {
+                console.error("Unable to start camera: ", err);
+            });
+    }
+
+    // Start scanning when the page loads
+    window.onload = startScanning;
+
+    // Add event listener to the stop button
+    document.getElementById('stop-camera').addEventListener('click', () => {
+        qrCodeReader.stop()
+            .then(() => {
+                console.log("Camera stopped.");
+            })
+            .catch(err => {
+                console.error("Error stopping the camera: ", err);
+            });
+    });
+</script>
+
+
 </body>
 </html>
