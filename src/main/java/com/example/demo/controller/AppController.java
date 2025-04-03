@@ -100,7 +100,7 @@ public class AppController {
     @PostMapping("/scan")
     public String handleQRCodeScan(@RequestParam("file") MultipartFile file, Model model) {
         if (file.isEmpty()) {
-            model.addAttribute("message", "Please select a PDF file to scan.");
+            model.addAttribute("message", "Please select a  file to scan.");
             return "scan";
         }
 
@@ -189,7 +189,7 @@ public class AppController {
 
 
     @RestController
-    @RequestMapping("/api/scanner")
+    @RequestMapping("/scan")
     public class ScannerController {
 
         private final ScannerService scannerService;

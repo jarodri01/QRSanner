@@ -4,42 +4,150 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text file Uploader and Data Input</title>
+    <style>
+        /* Basic Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: #ffffff;
+            padding: 20px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            background-color: #fdfdfd;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: purple;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+
+    </style>
 </head>
 <body>
-<h1>Text file Uploader and Manual Data Entry</h1>
-
-<!-- Form to upload Excel file -->
+<!-- Form to upload Text file -->
+<div class="form-container">
 <h2>Upload Text File</h2>
-<form action="upload" method="post" enctype="multipart/form-data">
+    <form action="/add/upload" method="post" enctype="multipart/form-data">
     <label for="file">Choose Excel File:</label>
     <input type="file" id="file" name="file" required>
+        <div class="form-actions">
     <button type="submit">Upload</button>
-</form>
+        </div>
 <p th:text="${message}"></p>
-<hr>
-<!-- Form to manually input data -->
-<h2>Manual Data Entry Form</h2>
+    </form>
+    <!-- Name -->
+
 <form action="/upload" method="post">
 
-    <label for="qrCodeData">QR CODE:</label>
-    <input type="text" id="qrCodeData" name="qrCodeData" required><br><br>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+    </div>
 
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required><br><br>
-
+    <!-- Email -->
+    <div class="form-group">
     <label for="email">Email</label>
-    <input type="text" id="email" name="email" required><br><br>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    </div>
 
-    <label for="numberOfTickets">Number of Tickets:</label>
-    <input type="number" id="numberOfTickets" name="numberOfTickets" required><br><br>
-
-    <label for="paid">Paid:</label>
-    <select id="paid" name="paid" required>
-        <option value="true">Yes</option>
-        <option value="false">No</option>
-    </select><br><br>
-
-    <button type="submit">Save Data</button>
+    <!-- Number of Tickets -->
+    <div class="form-group">
+        <label for="numberOfTickets">Number of Tickets</label>
+        <input type="text" id="numberOfTickets" name="numberOfTickets" placeholder="Enter ticket count" required>
+    </div>
+    <!-- Paid (Yes/No) -->
+    <div class="form-group">
+        <label>Paid</label>
+        <div class="radio-group">
+            <label>
+                <input type="radio" id="paidYes" name="paid" value="yes" required> Yes
+            </label>
+            <label>
+                <input type="radio" id="paidNo" name="paid" value="no" required> No
+            </label>
+        </div>
+    </div>
+    <!-- Submit Button -->
+    <div class="form-actions">
+        <button type="submit">Submit</button>
+    </div>
 </form>
+    <div class="message">
+        Note: Make sure all fields are filled before submitting.
+    </div>
+</div>
 </body>
 </html>

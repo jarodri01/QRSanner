@@ -19,15 +19,38 @@
             color: red;
             font-weight: bold;
         }
+
+        button {
+            background-color: purple;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
     </style>
 
 
 </head>
 <body>
 <h1>Scan QR Code</h1>
+
 <form action="/scan" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" accept=".png,.jpg,.jpeg">
-    <button type="submit">Scan</button>
+    <label>Choose Text File:</label>
+    <input type="file" id="file-input" name="file" accept=".txt" style="opacity: 0; position: absolute; z-index: -1;"/>
+    <input type="file" name="file" accept=".png,.jpg,.jpeg,">
+
+    <div class="form-actions">
+        <button type="submit">Scan</button>
+    </div>
+
 </form>
 <p th:text="${message}"></p>
 <p th:if="${result != null}" th:text="'QR Code Data: ' + ${result}"></p>

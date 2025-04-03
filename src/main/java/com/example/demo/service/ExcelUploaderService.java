@@ -29,9 +29,9 @@ public class ExcelUploaderService {
                 if (fields.length >= 2) {
                     DataRecord record = new DataRecord();
                     record.setName(fields[0].trim());
-                    record.setQrCodeData(fields[1].trim());
                     record.setNumberOfTickets(Integer.parseInt(fields[2].trim()));
                     record.setPaid(Boolean.parseBoolean(fields[3].trim()));
+                    record.setQrCodeData(fields[1].trim());
                     record.setEmail(fields[4].trim());
 
                     // Add additional fields as needed
