@@ -18,8 +18,7 @@
         }
 
         .hero-image {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url("/images/MP_banner_general1.jpg");
+            background-color: purple;
             height: 50%;
             background-position: center;
             background-repeat: no-repeat;
@@ -50,7 +49,7 @@
         }
 
         .hero-text button:hover {
-            background-color: #555;
+            background-color: purple;
             color: white;
         }
 
@@ -94,7 +93,7 @@
         .link-box {
             width: 100px;
             height: 100px;
-            border: 2px solid Violet; /* Green border */
+            border: 2px solid Violet;
             border-radius: 10px; /* Rounded corners */
             text-align: center; /* Center text horizontally */
             display: flex; /* Use flexbox for alignment */
@@ -146,19 +145,9 @@
 </div>
 <ul class="ul">
     <div class="inline-container"
-    ><a class="link-box" th:href="@{/add/upload}" target="_blank">
+    ><a class="link-box" th:href="@{/uploader}" target="_blank">
         <div class="circle">
             <i style="font-size:36px" class="fa">&#xf151;</i></div>
-    </a></div>
-    <div class="inline-container"
-    ><a class="link-box" th:href="@{/api/scan}" target="_blank">
-        <div class="circle">
-            <i style="font-size:36px" class="fa">&#xf083;</i></div>
-    </a></div>
-    <div class="inline-container"
-    ><a class="link-box" th:href="@{/generate}" target="_blank">
-        <div class="circle">
-            <i style="font-size:36px" class="fa">&#xf029;</i></div>
     </a></div>
 </ul>
 </body>
