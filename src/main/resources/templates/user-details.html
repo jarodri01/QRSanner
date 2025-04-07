@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<h2>User Details</h2>
+<table>
+    <tr>
+        <th>Name</th>
+        <td th:text="${user.name}"></td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td th:text="${user.email}"></td>
+    </tr>
+    <tr>
+        <th>Paid</th>
+        <td th:text="${user.paid ? 'Yes' : 'No'}"></td>
+    </tr>
+    <tr>
+        <th>Tickets</th>
+        <td th:text="${user.tickets}"></td>
+    </tr>
+</table>
+</body>
+</html>

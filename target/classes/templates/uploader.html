@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Users</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 10px; text-align: left; }
+        form { margin: 20px auto; width: 50%; }
+        input, button { padding: 10px; margin: 5px; }
+        button { padding: 10px; font-size: 16px; margin-top: 10px; cursor: pointer; }
+        button {
+            background-color: purple;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: goldenrod;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+    </style>
+</head>
+<body>
+
+<h2>Add User Manually</h2>
+<form action="/uploader/add" method="post">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="number" name="tickets" placeholder="Ticket Number" required>
+    <select name="paid">
+        <option value="true">Paid</option>
+        <option value="false">Not Paid</option>
+    </select>
+    <button type="submit">Add User</button>
+</form>
+
+<h2>Upload Users from File</h2>
+<form action="/uploader/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".txt" required>
+    <button type="submit">Upload</button>
+</form>
+
+<h2>Users List</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Ticket Number</th>
+        <th>Paid</th>
+    </tr>
+    <tr th:each="upload : ${uploader}">
+        <td>
+        <a th:href="@{'/user/generate-qr/' + ${upload.id}}" th:text="${upload.id}"></a></td>
+        <td th:text="${upload.name}"></td>
+        <td th:text="${upload.email}"></td>
+        <td th:text="${upload.tickets}"></td>
+        <td th:text="${upload.paid ? 'Yes' : 'No'}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

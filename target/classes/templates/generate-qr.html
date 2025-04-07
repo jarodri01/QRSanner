@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Generate QR Codes</title>
+    <style>
+        button {
+            background-color: purple;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Generate QR Codes</h1>
+<form action="/generate-qr/{id}" method="post">
+    <button type="submit">Generate QR Code PDF</button>
+</form>
+<p th:text="${message}"></p>
+</body>
+</html>

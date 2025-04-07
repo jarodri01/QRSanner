@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QR Code Verification</title>
+</head>
+<body>
+<h1>QR Code Verification</h1>
+
+<div>
+  <p>Status:
+    <span th:style="'color: ' + (${status} == 'success' ? 'green' : 'red')">
+                [[${message}]]
+            </span>
+  </p>
+
+    <div th:style="'visibility: ' + (${status} == 'success' ? 'visible' : 'hidden')">
+    <h2>Green Checkmark!</h2>
+    <p>Matching information:</p>
+    <ul>
+      <li>Name: [[${name}]]</li>
+      <li>Email: [[${email}]]</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
