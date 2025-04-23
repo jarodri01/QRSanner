@@ -44,6 +44,7 @@
     </script>
 </head>
 <body>
+<button onclick="window.location.href='/index'">return home</button>
 <h2>QR Code for <span th:text="${user.name}"></span></h2>
 <img th:src="'data:image/png;base64,' + ${qrCode}" alt="QR Code">
 <p>Scan this QR code to view details.</p>

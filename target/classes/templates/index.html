@@ -7,6 +7,108 @@
             height: 100%;
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            background-color: #060606;
+        }
+
+        .container-table {
+            overflow-y: auto;
+            max-height: 300px;
+            padding: -2px;
+            background-color: gainsboro;
+            border: 1px solid mediumpurple;
+            border-radius: 8px;
+            border-bottom: 2px solid purple;
+            z-index: 1;
+            top: 0;
+        }
+        th {
+           position: sticky;
+           top: 0;
+           z-index: 1;
+           color: white;
+
+        }
+        table {
+            border-collapse: separate;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 10px 10px;
+            border: 4px solid purple;
+            text-align: center;
+        }
+
+        th {
+            background: purple;
+        }
+
+        form {
+            margin: 20px auto;
+            width: 50%;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        button {
+            background-color: purple;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: goldenrod;
+        }
+
+        .bordered {
+            width: 400px;
+            height: 100px;
+            padding: 20px;
+            border: 1px solid mediumpurple;
+            border-radius: 8px;
+            background-color: #1b2028;
+            position: relative;
+            background-clip: padding-box;
+            text-align: center;
+            color: #f1f3f3;
+            background-image: linear-gradient(
+            135deg,
+            rgba(#752e7c, 0.35),
+            rgba(#734a58, 0.1) 15%,
+            #1b2028 20%,
+            #1b2028 100%);
+        }
+
+        .bordered2 {
+            width: 400px;
+            height: 45px;
+            padding: 20px;
+            border: 1px solid mediumpurple;
+            border-radius: 8px;
+            background-color: #1b2028;
+            position: relative;
+            background-clip: padding-box;
+            text-align: center;
+            color: #f1f3f3;
+            background-image: linear-gradient(
+                    135deg,
+                    rgba(#752e7c, 0.35),
+                    rgba(#734a58, 0.1) 15%,
+                    #1b2028 20%,
+                    #1b2028 100%);
         }
 
         .hero-image {
@@ -15,6 +117,7 @@
             background-repeat: no-repeat;
             background-size: cover;
             position: relative;
+            box-shadow: 20px 20px 60px 20px #752e7c;
         }
 
         .hero-image {
@@ -75,47 +178,6 @@
             color: Yellow; /* Change link color on hover */
         }
 
-        .ul {
-            list-style-type: none;
-            margin: 10px 0;
-            padding: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            justify-content: space-evenly; /* Distribute evenly, including space at the edges */
-
-
-        }
-
-
-        /* Create a styled box */
-        .link-box {
-            width: 100px;
-            height: 100px;
-            border: 2px solid Violet;
-            border-radius: 10px; /* Rounded corners */
-            text-align: center; /* Center text horizontally */
-            display: flex; /* Use flexbox for alignment */
-            justify-content: center; /* Center content horizontally */
-            align-items: center; /* Center content vertically */
-            background-color: white; /* Light background */
-            margin: 20px auto; /* Center box on the page */
-            font-family: Arial, sans-serif; /* Font style */
-            position: relative;
-        }
-
-        .circle {
-            width: 65px; /* Circle size */
-            height: 65px; /* Circle size */
-            border-radius: 50%; /* Makes it a circle */
-            background-color: rebeccapurple; /* Circle color */
-            position: absolute; /* Allows positioning within the box */
-            top: 50%; /* Centers vertically */
-            left: 50%; /* Centers horizontally */
-            transform: translate(-50%, -50%); /* Fine-tune centering */
-
-        }
-
         /* Styling for the link */
         .link-box i {
             text-decoration: none;
@@ -125,6 +187,7 @@
             border-bottom: 2rem solid transparent;
 
         }
+
         /* The navbar */
         .topnav {
             overflow: hidden;
@@ -150,6 +213,13 @@
         .link-box a:hover {
             color: Yellow; /* Change color on hover */
         }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
     </style>
 
     <title>QR Code App</title>
@@ -159,7 +229,7 @@
 <div class="bg-img">
     <div class="container">
         <div class="topnav">
-            <a href="#home">Home</a>
+            <a href="/index">Home</a>
             <a href="#news">Hot To Use</a>
             <a href="#contact">Contact</a>
             <a href="#about">About</a>
@@ -167,16 +237,87 @@
     </div>
 </div>
 <div class="hero-image">
-<div class="hero-text">
-    <h1 style="font-size:25px">Welcome to the QR Code App</h1>
+    <div class="hero-text">
+        <h1 style="font-size:25px">Welcome to the QR Code App</h1>
 </div>
 </div>
-<ul class="ul">
-    <div class="inline-container"
-    ><a class="link-box" th:href="@{/uploader}" target="_blank">
-        <div class="circle">
-            <i style="font-size:36px" class="fa">&#xf151;</i></div>
-    </a></div>
-</ul>
+<div class="background-img">
+    <h2>Add User Manually</h2>
+    <form class="bordered" action="/index/add" method="post">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="number" name="tickets" placeholder="Ticket Number" required>
+        <select name="paid">
+            <option value="true">Paid</option>
+            <option value="false">Not Paid</option>
+        </select>
+        <button type="submit">Add User</button>
+    </form>
+
+    <h2>Upload Users from File</h2>
+    <form class="bordered2" action="/index/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".txt" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>Users List</h2>
+    <div class="container-table">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Ticket Number</th>
+                <th>Paid</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="upload : ${index}">
+                <td>
+                    <a th:href="@{'/user/generate-qr/' + ${upload.id}}" th:text="${upload.id}"></a></td>
+                <td th:text="${upload.name}"></td>
+                <td th:text="${upload.email}"></td>
+                <td th:text="${upload.tickets}"></td>
+                <td th:text="${upload.paid ? 'Yes' : 'No'}"></td>
+                <td>
+                    <button class="deleteButton" th:onclick="'deleteRoll(' + ${upload.id} + ')'">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer class="footer">something good! </footer>
 </body>
+<script>
+    // Add the function to delete a roll
+    async function deleteRoll(id) {
+        const confirmed = confirm("Are you sure you want to delete this roll?");
+        if (!confirmed) return;
+
+        try {
+            const response = await fetch(`/index/${id}`, { method: 'DELETE' });
+            if (response.ok) {
+                alert("Roll deleted successfully.");
+
+                // Remove the row from the table
+                window.location.href = window.location.href; // reload page!
+                const rowToDelete = document.querySelector(`tr[data-id="${id}"]`);
+                if (rowToDelete) {
+                    rowToDelete.remove(); // Remove the row dynamically
+                }
+            } else if (response.status === 404) {
+                alert("Roll not found!");
+            } else {
+                alert("Failed to delete roll. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error while deleting:", error);
+            alert("An error occurred. Please try again.");
+        }
+
+    }
+</script>
 </html>

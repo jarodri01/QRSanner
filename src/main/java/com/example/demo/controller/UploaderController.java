@@ -1,26 +1,18 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.User;
-import com.example.demo.repositories.UserRepository;
+
 import com.example.demo.service.UploaderService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 
 @Controller
-@RequestMapping("/uploader")
+@RequestMapping("/index")
 public class UploaderController {
 
     @Autowired
@@ -29,8 +21,8 @@ public class UploaderController {
 
     @GetMapping
     public String showUsers(Model model) {
-        model.addAttribute("uploader", uploaderService.getAllUsers());
-        return "uploader";
+        model.addAttribute("index", uploaderService.getAllUsers());
+        return "index";
     }
 
     @PostMapping("/add")
@@ -39,13 +31,28 @@ public class UploaderController {
                           @RequestParam int tickets,
                           @RequestParam boolean paid) {
         uploaderService.addUser(name, email, tickets, paid);
-        return "redirect:/uploader";
+        return "redirect:/index";
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteRoll(@PathVariable Long id) {
+        try {
+            boolean isDeleted = uploaderService.deleteUserById(id);
+            if (isDeleted) {
+                return ResponseEntity.ok("Roll deleted successfully.");
+            } else {
+                return ResponseEntity.status(404).body("Roll not found.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("An error occurred while deleting the roll.");
+        }
+    }
+
 
     @PostMapping("/upload")
     public String uploadUsers(@RequestParam("file") MultipartFile file) throws IOException {
         uploaderService.uploadUsersFromFile(file);
-        return "redirect:/uploader";
+        return "redirect:/index";
     }
 
 }

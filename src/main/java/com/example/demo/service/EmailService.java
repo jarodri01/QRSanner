@@ -14,7 +14,7 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendEmailWithQRCode(String to, String name, String qrCodeBase64) throws MessagingException {
+    public void sendEmailWithQRCode(String to, String name, String qrCodeBase64, String lettermark) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
@@ -24,9 +24,15 @@ public class EmailService {
         String htmlContent = "<h2>Hello, " + name + "!</h2>"
                 + "<p>Here is your QR code for the event:</p>"
                 + "<img src='data:image/png;base64," + qrCodeBase64 + "' alt='QR Code'>"
-                + "<p>Scan this QR code to check in.</p>";
+                + "<p>Scan this QR code to check in.</p>"
+                + "<img src='cid:logoImage' alt='Event Logo' style='width:150px;height:auto;'>";
 
         helper.setText(htmlContent, true);
+        // Attach the logo file
+        org.springframework.core.io.Resource logoResource = new org.springframework.core.io.ClassPathResource("static/images/MP_lettermark.png");
+        helper.addInline("logoImage", logoResource);
+
+
         mailSender.send(message);
     }
 }

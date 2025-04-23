@@ -62,7 +62,8 @@ public class UserController {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             String qrCode = qrCodeService.generateQRCode(id);
-            emailService.sendEmailWithQRCode(user.get().getEmail(), user.get().getName(), qrCode);
+            String logo = "https://localhost:8080/static/MP_lettermark.png";
+            emailService.sendEmailWithQRCode(user.get().getEmail(), user.get().getName(), qrCode, logo);
             model.addAttribute("message", "Email sent successfully to " + user.get().getEmail());
             return "email-confirmation";
         } else {
