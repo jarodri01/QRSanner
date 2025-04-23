@@ -1,1 +1,1 @@
-web: java -jar target/TicketScanner-1.0.0-SNAPSHOT.jar
+web: java -jar target/TicketScanner-1.0-SNAPSHOT.jar
