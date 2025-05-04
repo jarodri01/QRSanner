@@ -184,7 +184,7 @@
 <h2>User Details</h2>
 <article class="profile">
     <div class="profile-image">
-        <img src="/static/images/Logo_Melrose.png"/>
+        <img th:src="@{/images/Logo_Melrose.png}" alt="Melrose"/>
     </div>
     <h2 class="profile-username" th:text="${user.name}"></h2>
     <a>email</a>
