@@ -7,7 +7,6 @@ spring:
   sql:
     init:
       platform: org.postgresql.Driver
-
 # Optional: any production-specific overrides can go here
 pdf:
   output:

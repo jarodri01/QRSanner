@@ -27,3 +27,16 @@ spring.mail:
   password: ${EMAIL_PASSWORD}
   properties.mail.smtp.auth: true
   properties.mail.smtp.starttls.enable: true
+
+web:
+  resources:
+    static-locations: classpath:/static/, classpath:/public/, classpath:/resources/, classpath:/META-INF/resources/
+    cache:
+      cachecontrol:
+        max-age: 3600 # Cache static resources in the client for 1 hour.
+        public: true   # Mark them as publicly cacheable.
+
+# Server-related configurations
+server:
+  servlet:
+    context-path: /   # Ensures that your app serves static files correctly without a sub-path.
