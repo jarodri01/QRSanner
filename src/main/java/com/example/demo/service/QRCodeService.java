@@ -19,7 +19,7 @@ import java.util.Map;
 @Service
 public class QRCodeService {
 
-    private static final String BASE_URL = "http://localhost:8080/user/";
+    private static final String BASE_URL = "https://ticketscanner-5849c904ea5f.herokuapp.com/user/";
 
     public String generateQRCode(Long userId) throws WriterException, IOException {
 
