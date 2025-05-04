@@ -1,6 +1,9 @@
-com/example/demo/repositories/UserRepository.class
 com/example/demo/service/QRCodeService.class
+com/example/demo/model/User.class
+com/example/demo/repositories/UserRepository.class
+com/example/demo/service/UploaderService.class
+com/example/demo/controller/UserController.class
+com/example/demo/controller/QRCodeVerificationController.class
+com/example/demo/controller/UploaderController.class
 com/example/demo/TicketScannerApplication.class
 com/example/demo/service/EmailService.class
-com/example/demo/controller/UserController.class
-com/example/demo/model/User.class

@@ -1,15 +1,9 @@
 /Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/TicketScannerApplication.java
-/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/controller/AppController.java
-/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/controller/QRCodeController.java
 /Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/controller/QRCodeVerificationController.java
+/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/controller/UploaderController.java
 /Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/controller/UserController.java
-/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/dto/DataInputRequest.java
-/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/model/DataRecord.java
 /Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/model/User.java
-/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/repositories/DataRecordRepository.java
 /Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/repositories/UserRepository.java
 /Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/service/EmailService.java
-/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/service/ExcelUploaderService.java
-/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/service/QRCodeGeneratorService.java
 /Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/service/QRCodeService.java
-/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/service/ScannerService.java
+/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/service/UploaderService.java
