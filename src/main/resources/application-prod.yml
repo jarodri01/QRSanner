@@ -7,9 +7,6 @@ spring:
   sql:
     init:
       platform: org.postgresql.Driver
-
-server:
-  port: ${PORT:8080}
 # Optional: any production-specific overrides can go here
 pdf:
   output:
