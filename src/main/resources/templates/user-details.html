@@ -1,7 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
+        /* For smaller devices like phones */
+        @media (max-width: 600px) {
+            .profile {
+                max-width: 90%;
+                padding: 2rem;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .profile-username {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* For tablets */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .profile {
+                max-width: 400px;
+                padding: 3rem;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .profile-username {
+                font-size: 1.4rem;
+            }
+        }
+
         @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
         *,
@@ -21,7 +57,7 @@
             background-color: #060606;
         }
 
-        button, a
+        button, a,
         input,
         select,
         textarea {
@@ -40,7 +76,6 @@
             flex-direction: column;
             padding: 3rem;
             width: 90%;
-            max-width: 300px;
             background-color: #1b2028;
             border-radius: 16px;
             position: relative;
@@ -79,8 +114,8 @@
         .profile-image {
             border-radius: 50%;
             overflow: hidden;
-            width: 175px;
-            height: 175px;
+            width: 100%;
+            height: auto;
             position: relative;
 
             img {
