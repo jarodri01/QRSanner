@@ -29,7 +29,7 @@ public class EmailService {
 
         helper.setText(htmlContent, true);
         // Attach the logo file
-        org.springframework.core.io.Resource logoResource = new org.springframework.core.io.ClassPathResource("static/images/MP_lettermark.png");
+        org.springframework.core.io.Resource logoResource = new org.springframework.core.io.ClassPathResource("https://res.cloudinary.com/dcehvbp8e/image/upload/v1746408815/MP_lettermark_c25a7e.png");
         helper.addInline("logoImage", logoResource);
 
 
