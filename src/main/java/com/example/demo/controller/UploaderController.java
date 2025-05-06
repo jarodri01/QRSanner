@@ -51,6 +51,11 @@ public class UploaderController {
 
     @PostMapping("/upload")
     public String uploadUsers(@RequestParam("file") MultipartFile file) throws IOException {
+        String fileType = file.getContentType();
+        if (fileType == null || (!fileType.equals("application/vnd.ms-excel") && !fileType.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))) {
+            throw new IllegalArgumentException("Invalid file type. Please upload an Excel file.");
+        }
+
         uploaderService.uploadUsersFromFile(file);
         return "redirect:/index";
     }
