@@ -3,21 +3,21 @@ package com.example.demo.controller;
 
 import com.example.demo.service.UploaderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
 
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/index")
 public class UploaderController {
-
+    @Lazy
     @Autowired
     private UploaderService uploaderService;
-
 
     @GetMapping
     public String showUsers(Model model) {
@@ -48,16 +48,48 @@ public class UploaderController {
         }
     }
 
-
     @PostMapping("/upload")
-    public String uploadUsers(@RequestParam("file") MultipartFile file) throws IOException {
-        String fileType = file.getContentType();
-        if (fileType == null || (!fileType.equals("application/vnd.ms-excel") && !fileType.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))) {
-            throw new IllegalArgumentException("Invalid file type. Please upload an Excel file.");
+    public String uploadUsers(@RequestParam("file") MultipartFile file, Model model) throws IOException {
+        String fileName = file.getOriginalFilename();
+
+        String contentType = file.getContentType();
+
+        // Debug logging
+        System.out.println("Received file: " + fileName);
+        System.out.println("Content Type: " + contentType);
+        System.out.println("File size: " + file.getSize());
+
+        if (fileName == null || fileName.isEmpty()) {
+            model.addAttribute("error", "No file selected");
+            return "error-page";
         }
 
-        uploaderService.uploadUsersFromFile(file);
-        return "redirect:/index";
+        // Check file extension instead of content type
+        String fileExtension = fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
+
+        try {
+            if (isExcelExtension(fileExtension)) {
+                uploaderService.uploadUsersFromExcel(file);
+            } else if (isTextExtension(fileExtension)) {
+                uploaderService.uploadUsersFromTextFile(file);
+            } else {
+                model.addAttribute("error", "Invalid file type. Please upload an Excel (.xlsx, .xls) or Text (.txt) file.");
+                return "error-page";
+            }
+
+            return "redirect:/index";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error processing file: " + e.getMessage());
+            return "error-page";
+        }
+    }
+
+    private boolean isExcelExtension(String fileExtension) {
+        return fileExtension.equals(".xlsx") || fileExtension.equals(".xls");
+    }
+
+    private boolean isTextExtension(String fileExtension) {
+        return fileExtension.equals(".txt");
     }
 
 }
