@@ -28,9 +28,15 @@ public class UploaderController {
     @PostMapping("/add")
     public String addUser(@RequestParam String name,
                           @RequestParam String email,
-                          @RequestParam int tickets,
-                          @RequestParam boolean paid) {
-        uploaderService.addUser(name, email, tickets, paid);
+                          @RequestParam String teacherName,
+                          @RequestParam String guestName1,
+                          @RequestParam String guestName2,
+                          @RequestParam String guestName3,
+                          @RequestParam String guestName4
+                          // @RequestParam int tickets,
+                          // @RequestParam boolean paid)
+    ) {
+        uploaderService.addUser(name, email, teacherName, guestName1, guestName2, guestName3, guestName4);
         return "redirect:/index";
     }
 

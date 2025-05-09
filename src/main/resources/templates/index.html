@@ -55,20 +55,38 @@
         <h2 class="text-center mb-4">Add Guests Manually</h2>
         <form class="p-4 border border-4 rounded bg-secondary text-light" action="/index/add" method="post">
             <div class="mb-3">
-                <input type="text" name="name" class="form-control" placeholder="Full Name" required>
+                <input type="text" name="name" class="form-control" placeholder=" Students Full Name" required>
             </div>
             <div class="mb-3">
                 <input type="email" name="email" class="form-control" placeholder="Email" required>
             </div>
             <div class="mb-3">
-                <input type="number" name="tickets" class="form-control" placeholder="Ticket Number" required>
+                <input type="text" name="teacherName" class="form-control" placeholder="Teacher's Name" required>
             </div>
             <div class="mb-3">
-                <select name="paid" class="form-select">
-                    <option value="true">Paid</option>
-                    <option value="false">Not Paid</option>
-                </select>
+                <input type="text" name="guestName1" class="form-control" placeholder="Guest name 1" required>
             </div>
+            <div class="mb-3">
+                <input type="text" id="guestName2" name="guestName2" class="form-control" placeholder="Guest Name 2"
+                       required>
+            </div>
+            <div class="mb-3">
+                <input type="text" id=guestName3 name="guestName3" class="form-control" placeholder="Guest Name 3"
+                       required>
+            </div>
+            <div class="mb-3">
+                <input type="text" id=guestName4 name="guestName4" class="form-control" placeholder="Guest Name 4"
+                       required>
+            </div>
+            <!--            <div class="mb-3">-->
+            <!--                <input type="number" name="tickets" class="form-control" placeholder="Ticket Number" required>-->
+            <!--            </div>-->
+            <!--            <div class="mb-3">-->
+            <!--                <select name="paid" class="form-select">-->
+            <!--                    <option value="true">Paid</option>-->
+            <!--                    <option value="false">Not Paid</option>-->
+            <!--                </select>-->
+            <!--            </div>-->
             <button type="submit" class="btn table-purple-row text-white btn-purple btn-block w-100">Add Guests</button>
         </form>
     </section>
@@ -93,10 +111,13 @@
                 <thead class="bg-purple text-white">
                 <tr class="table-purple-row">
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>Student's Name</th>
                     <th>Email</th>
-                    <th>Ticket Number</th>
-                    <th>Paid</th>
+                    <th>Teachers Name</th>
+                    <th>Guest Name 1</th>
+                    <th>Guest Name 2</th>
+                    <th>Guest Name 3</th>
+                    <th>Guest Name 4</th>
                     <th>Delete</th>
                 </tr>
                 </thead>
@@ -107,8 +128,14 @@
                     </td>
                     <td th:text="${upload.name}"></td>
                     <td th:text="${upload.email}"></td>
-                    <td th:text="${upload.tickets}"></td>
-                    <td th:text="${upload.paid ? 'Yes' : 'No'}"></td>
+                    <td th:text="${upload.teacherName}"></td>
+                    <td th:text="${upload.guestName1}"></td>
+                    <td th:text="${upload.guestName2}"></td>
+                    <td th:text="${upload.guestName3}"></td>
+                    <td th:text="${upload.guestName4}"></td>
+
+                    <!--                    <td th:text="${upload.tickets}"></td>-->
+                    <!--                    <td th:text="${upload.paid ? 'Yes' : 'No'}"></td>-->
                     <td>
                         <button class="btn btn-sm btn-danger deleteButton"
                                 th:onclick="'deleteRoll(' + ${upload.id} + ')'">Delete
@@ -139,7 +166,7 @@
             const response = await fetch(`/index/${id}`, {method: 'DELETE'});
             if (response.ok) {
                 alert("Roll deleted successfully.");
-                window.location.href = window.location.href; // Reload page to see changes
+                window.location.href = window.location.href; // Reload the page to see changes
             } else if (response.status === 404) {
                 alert("Roll not found!");
             } else {

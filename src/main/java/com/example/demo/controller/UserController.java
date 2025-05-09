@@ -60,13 +60,17 @@ public class UserController {
     public String sendQRCodeEmail(@PathVariable Long id, Model model) throws WriterException, IOException, MessagingException {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
+            User currentUser = user.get();
             String qrCode = qrCodeService.generateQRCode(id);
-            String logo = "https://localhost:8080/static/MP_lettermark.png";
-            emailService.sendEmailWithQRCode(user.get().getEmail(), user.get().getName(), qrCode, logo);
-            model.addAttribute("message", "Email sent successfully to " + user.get().getEmail());
+            String logoUrl = "https://res.cloudinary.com/dcehvbp8e/image/upload/v1746408808/Logo_Melrose_ivlz3i.png";
+
+            emailService.sendEmailWithQRCode(currentUser.getEmail(), currentUser.getName(), qrCode, logoUrl);
+            model.addAttribute("message", "Email sent successfully to " + currentUser.getEmail());
             return "email-confirmation";
         } else {
-            return "Error: User not found";
+            model.addAttribute("error", "User not found");
+            return "error";
         }
     }
+
 }

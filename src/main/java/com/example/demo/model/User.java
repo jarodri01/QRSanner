@@ -17,7 +17,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
+@Table(name = "Guest")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,18 +25,28 @@ public class User {
 
     private String name;
     private String email;
-    private boolean paid;
-    private int tickets;
-
+    private String teacherName;
+    private String guestName1;
+    private String guestName2;
+    private String guestName3;
+    private String guestName4;
+    //  private boolean paid;
+    // private int tickets;
 
     public User() {
     }
 
-    public User(String name, String email, boolean paid, int tickets) {
+    public User(String name, String email, String teacherName, String guestName1, String guestName2, String guestName3, String guestName4) {
         this.name = name;
         this.email = email;
-        this.paid = paid;
-        this.tickets = tickets;
+        this.teacherName = teacherName;
+        this.guestName1 = guestName1;
+        this.guestName2 = guestName2;
+        this.guestName3 = guestName3;
+        this.guestName4 = guestName4;
+
+        // this.paid = paid;
+        // this.tickets = tickets;
     }
 
 }

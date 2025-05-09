@@ -1,4 +1,5 @@
 /Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/TicketScannerApplication.java
+/Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/controller/NavigationController.java
 /Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/controller/QRCodeVerificationController.java
 /Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/controller/UploaderController.java
 /Users/joserodriguez/IdeaProjects/coding-practice/TicketScanner/src/main/java/com/example/demo/controller/UserController.java

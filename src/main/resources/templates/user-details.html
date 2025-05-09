@@ -130,19 +130,38 @@
             <img src="https://res.cloudinary.com/dcehvbp8e/image/upload/v1746408808/Logo_Melrose_ivlz3i.png"
                  alt="Profile Picture">
         </div>
-        <h2 class="profile-username" th:text="${user.name}">User Name</h2>
+        <h2 class="profile-username" th:text="${user.name}">Student's Name</h2>
         <div>
             <p class="mb-1 fw-bold">Email:</p>
             <small class="profile-user-handle d-block" th:text="${user.email}">user@example.com</small>
         </div>
         <div>
-            <p class="mb-1 fw-bold">Paid:</p>
-            <small class="profile-user-handle d-block" th:text="${user.paid ? 'Yes' : 'No'}">Yes</small>
+            <p class="mb-1 fw-bold">Teacher's Name:</p>
+            <small class="profile-user-handle d-block" th:text="${user.teacherName}">Teacher's Name</small>
         </div>
         <div>
-            <p class="mb-1 fw-bold">Tickets:</p>
-            <small class="profile-user-handle d-block" th:text="${user.tickets}">5</small>
+            <p class="mb-1 fw-bold">Guest Name:</p>
+            <small class="profile-user-handle d-block" th:text="${user.guestName}">Guest Name</small>
         </div>
+        <div>
+            <p class="mb-1 fw-bold">Guest Name:</p>
+            <small class="profile-user-handle d-block" th:text="${user.guestName}">Guest Name</small>
+        </div>
+        <div>
+            <p class="mb-1 fw-bold">Guest Name:</p>
+            <small class="profile-user-handle d-block" th:text="${user.guestName}">Guest Name</small>
+        </div>
+        <div>
+            <p class="mb-1 fw-bold">Guest Name:</p>
+            <small class="profile-user-handle d-block" th:text="${user.guestName}">Guest Name</small>
+        </div>
+        <!--            <p class="mb-1 fw-bold">Paid:</p>-->
+        <!--            <small class="profile-user-handle d-block" th:text="${user.paid ? 'Yes' : 'No'}">Yes</small>-->
+        <!--        </div>-->
+        <!--        <div>-->
+        <!--            <p class="mb-1 fw-bold">Tickets:</p>-->
+        <!--            <small class="profile-user-handle d-block" th:text="${user.tickets}">5</small>-->
+        <!--        </div>-->
         <div class="mt-3">
             <a>Thank you</a><br><a>for joining us</a>
         </div>
