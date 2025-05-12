@@ -16,20 +16,23 @@ import java.util.List;
 @Service
 public class UploaderService {
 
+    private final UserRepository userRepository;
     @Autowired
-    private UserRepository userRepository;
+    public UploaderService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
 
     public void addUser(String name, String email, String teacherName, String guestName1, String guestName2, String guestName3, String guestName4) {
-        User users = new User();
-        users.setName(name);
-        users.setEmail(email);
-        users.setTeacherName(teacherName);
-        users.setGuestName1(guestName1);
-        users.setGuestName2(guestName2);
-        users.setGuestName3(guestName3);
-        users.setGuestName4(guestName4);
-        userRepository.save(users);
+        User user = new User();
+        user.setName(name);
+        user.setEmail(email);
+        user.setTeacherName(teacherName);
+        user.setGuestName1(guestName1);
+        user.setGuestName2(guestName2);
+        user.setGuestName3(guestName3);
+        user.setGuestName4(guestName4);
+        userRepository.save(user);
     }
 
 
@@ -39,17 +42,17 @@ public class UploaderService {
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
             if (data.length == 7) {
-                User users = new User();
-                users.setName(data[0].trim());
-                users.setEmail(data[1].trim());
-                users.setTeacherName(data[2].trim());
-                users.setGuestName1(data[3].trim());
-                users.setGuestName2(data[4].trim());
-                users.setGuestName3(data[5].trim());
-                users.setGuestName4(data[6].trim());
+                User user = new User();
+                user.setName(data[0].trim());
+                user.setEmail(data[1].trim());
+                user.setTeacherName(data[2].trim());
+                user.setGuestName1(data[3].trim());
+                user.setGuestName2(data[4].trim());
+                user.setGuestName3(data[5].trim());
+                user.setGuestName4(data[6].trim());
                 //user.setTickets(Integer.parseInt(data[2].trim()));
                 //user.setPaid(Boolean.parseBoolean(data[3].trim()));
-                userRepository.save(users);
+                userRepository.save(user);
             }
         }
     }
@@ -82,17 +85,17 @@ public class UploaderService {
                     //  int tickets = getNumericCellValue(row.getCell(2));
                     // boolean paid = getBooleanCellValue(row.getCell(3));
 
-                    User users = new User();
-                    users.setName(name);
-                    users.setEmail(email);
-                    users.setTeacherName(teacherName);
-                    users.setGuestName1(guestName1);
-                    users.setGuestName2(guestName2);
-                    users.setGuestName3(guestName3);
-                    users.setGuestName4(guestName4);
+                    User user = new User();
+                    user.setName(name);
+                    user.setEmail(email);
+                    user.setTeacherName(teacherName);
+                    user.setGuestName1(guestName1);
+                    user.setGuestName2(guestName2);
+                    user.setGuestName3(guestName3);
+                    user.setGuestName4(guestName4);
                     // user.setTickets(tickets);
                     //  user.setPaid(paid);
-                    userRepository.save(users);
+                    userRepository.save(user);
                 } catch (Exception e) {
                     System.err.println("Error processing row " + row.getRowNum() + ": " + e.getMessage());
                 }

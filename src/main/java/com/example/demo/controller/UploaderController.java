@@ -15,9 +15,12 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/index")
 public class UploaderController {
-    @Lazy
-    @Autowired
-    private UploaderService uploaderService;
+
+    private final UploaderService uploaderService;
+
+    public UploaderController(UploaderService uploaderService) {
+        this.uploaderService = uploaderService;
+    }
 
     @GetMapping
     public String showUsers(Model model) {

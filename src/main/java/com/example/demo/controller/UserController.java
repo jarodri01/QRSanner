@@ -21,15 +21,18 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    @Lazy
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    private final QRCodeService qrCodeService;
+
+    private final EmailService emailService;
 
     @Autowired
-    private QRCodeService qrCodeService;
-
-    @Autowired
-    private EmailService emailService;
+    public UserController(UserRepository userRepository, QRCodeService qrCodeService, EmailService emailService) {
+        this.userRepository = userRepository;
+        this.qrCodeService = qrCodeService;
+        this.emailService = emailService;
+    }
 
     @GetMapping("/{id}")
     public String getUserDetails(@PathVariable Long id, Model model) {
