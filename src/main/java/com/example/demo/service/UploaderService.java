@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
 
-import com.example.demo.model.User;
-import com.example.demo.repositories.UserRepository;
+import com.example.demo.model.Guest;
+import com.example.demo.repositories.GuestRepository;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -16,48 +16,40 @@ import java.util.List;
 @Service
 public class UploaderService {
 
-    private final UserRepository userRepository;
+
+    private final GuestRepository guestRepository;
     @Autowired
-    public UploaderService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UploaderService(GuestRepository guestRepository) {
+        this.guestRepository = guestRepository;
+
     }
 
 
-    public void addUser(String name, String email, String teacherName, String guestName1, String guestName2, String guestName3, String guestName4) {
-        User user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        user.setTeacherName(teacherName);
-        user.setGuestName1(guestName1);
-        user.setGuestName2(guestName2);
-        user.setGuestName3(guestName3);
-        user.setGuestName4(guestName4);
-        userRepository.save(user);
+    public void addGuest(String name, String email, String teacherName, String guestName1, String guestName2, String guestName3, String guestName4) {
+        excelGuest(name, email, teacherName, guestName1, guestName2, guestName3, guestName4);
     }
 
 
-    public void uploadUsersFromTextFile(MultipartFile file) throws IOException {
+    public void uploadGuestsFromTextFile(MultipartFile file) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
         String line;
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
             if (data.length == 7) {
-                User user = new User();
-                user.setName(data[0].trim());
-                user.setEmail(data[1].trim());
-                user.setTeacherName(data[2].trim());
-                user.setGuestName1(data[3].trim());
-                user.setGuestName2(data[4].trim());
-                user.setGuestName3(data[5].trim());
-                user.setGuestName4(data[6].trim());
-                //user.setTickets(Integer.parseInt(data[2].trim()));
-                //user.setPaid(Boolean.parseBoolean(data[3].trim()));
-                userRepository.save(user);
+                Guest guest = new Guest();
+                guest.setName(data[0].trim());
+                guest.setEmail(data[1].trim());
+                guest.setTeacherName(data[2].trim());
+                guest.setGuestName1(data[3].trim());
+                guest.setGuestName2(data[4].trim());
+                guest.setGuestName3(data[5].trim());
+                guest.setGuestName4(data[6].trim());
+                guestRepository.save(guest);
             }
         }
     }
 
-    public void uploadUsersFromExcel(MultipartFile file) {
+    public void uploadGuestsFromExcel(MultipartFile file) {
         try (InputStream is = file.getInputStream()) {
             Workbook workbook;
             if (file.getOriginalFilename().endsWith(".xlsx")) {
@@ -82,20 +74,8 @@ public class UploaderService {
                     String guestName2 = getStringCellValue(row.getCell(4));
                     String guestName3 = getStringCellValue(row.getCell(5));
                     String guestName4 = getStringCellValue(row.getCell(6));
-                    //  int tickets = getNumericCellValue(row.getCell(2));
-                    // boolean paid = getBooleanCellValue(row.getCell(3));
 
-                    User user = new User();
-                    user.setName(name);
-                    user.setEmail(email);
-                    user.setTeacherName(teacherName);
-                    user.setGuestName1(guestName1);
-                    user.setGuestName2(guestName2);
-                    user.setGuestName3(guestName3);
-                    user.setGuestName4(guestName4);
-                    // user.setTickets(tickets);
-                    //  user.setPaid(paid);
-                    userRepository.save(user);
+                    excelGuest(name, email, teacherName, guestName1, guestName2, guestName3, guestName4);
                 } catch (Exception e) {
                     System.err.println("Error processing row " + row.getRowNum() + ": " + e.getMessage());
                 }
@@ -104,6 +84,18 @@ public class UploaderService {
         } catch (Exception e) {
             throw new RuntimeException("Failed to process Excel file: " + e.getMessage(), e);
         }
+    }
+
+    private void excelGuest(String name, String email, String teacherName, String guestName1, String guestName2, String guestName3, String guestName4) {
+        Guest guest = new Guest();
+        guest.setName(name);
+        guest.setEmail(email);
+        guest.setTeacherName(teacherName);
+        guest.setGuestName1(guestName1);
+        guest.setGuestName2(guestName2);
+        guest.setGuestName3(guestName3);
+        guest.setGuestName4(guestName4);
+        guestRepository.save(guest);
     }
 
 
@@ -124,8 +116,8 @@ public class UploaderService {
         switch (cell.getCellType()) {
             case STRING:
                 return cell.getStringCellValue();
-            //  case NUMERIC:
-            //     return String.valueOf((int) cell.getNumericCellValue());
+            case NUMERIC:
+                return String.valueOf((int) cell.getNumericCellValue());
             // case BOOLEAN:
             //    return String.valueOf(cell.getBooleanCellValue());
             default:
@@ -166,15 +158,13 @@ public class UploaderService {
     //   }
 
 
-
-
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<Guest> getAllGuests() {
+        return guestRepository.findAll();
     }
 
-    public boolean deleteUserById(Long id) {
-        if (userRepository.existsById(id)) {
-            userRepository.deleteById(id);
+    public boolean deleteGuestById(Long id) {
+        if (guestRepository.existsById(id)) {
+            guestRepository.deleteById(id);
             return true;
         }
         return false; // Roll not found

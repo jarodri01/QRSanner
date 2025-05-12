@@ -2,8 +2,6 @@ package com.example.demo.controller;
 
 
 import com.example.demo.service.UploaderService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +21,13 @@ public class UploaderController {
     }
 
     @GetMapping
-    public String showUsers(Model model) {
-        model.addAttribute("index", uploaderService.getAllUsers());
+    public String showGuests(Model model) {
+        model.addAttribute("index", uploaderService.getAllGuests());
         return "index";
     }
 
     @PostMapping("/add")
-    public String addUser(@RequestParam String name,
+    public String addGuest(@RequestParam String name,
                           @RequestParam String email,
                           @RequestParam String teacherName,
                           @RequestParam String guestName1,
@@ -39,14 +37,14 @@ public class UploaderController {
                           // @RequestParam int tickets,
                           // @RequestParam boolean paid)
     ) {
-        uploaderService.addUser(name, email, teacherName, guestName1, guestName2, guestName3, guestName4);
+        uploaderService.addGuest(name, email, teacherName, guestName1, guestName2, guestName3, guestName4);
         return "redirect:/index";
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteRoll(@PathVariable Long id) {
         try {
-            boolean isDeleted = uploaderService.deleteUserById(id);
+            boolean isDeleted = uploaderService.deleteGuestById(id);
             if (isDeleted) {
                 return ResponseEntity.ok("Roll deleted successfully.");
             } else {
@@ -58,7 +56,7 @@ public class UploaderController {
     }
 
     @PostMapping("/upload")
-    public String uploadUsers(@RequestParam("file") MultipartFile file, Model model) throws IOException {
+    public String uploadGuests(@RequestParam("file") MultipartFile file, Model model) throws IOException {
         String fileName = file.getOriginalFilename();
 
         String contentType = file.getContentType();
@@ -78,9 +76,9 @@ public class UploaderController {
 
         try {
             if (isExcelExtension(fileExtension)) {
-                uploaderService.uploadUsersFromExcel(file);
+                uploaderService.uploadGuestsFromExcel(file);
             } else if (isTextExtension(fileExtension)) {
-                uploaderService.uploadUsersFromTextFile(file);
+                uploaderService.uploadGuestsFromTextFile(file);
             } else {
                 model.addAttribute("error", "Invalid file type. Please upload an Excel (.xlsx, .xls) or Text (.txt) file.");
                 return "error-page";

@@ -83,7 +83,7 @@
             margin-top: 1.5rem;
         }
 
-        .profile-user-handle {
+        .profile-guest-handle {
             color: #7d8396;
             font-size: 0.9rem;
         }
@@ -130,30 +130,30 @@
             <img src="https://res.cloudinary.com/dcehvbp8e/image/upload/v1746408808/Logo_Melrose_ivlz3i.png"
                  alt="Profile Picture">
         </div>
-        <h2 class="profile-username" th:text="${user.name}">Student's Name</h2>
+        <h2 class="profile-guestname" th:text="${guest.name}">Student's Name</h2>
         <div>
             <p class="mb-1 fw-bold">Email:</p>
-            <small class="profile-user-handle d-block" th:text="${user.email}">user@example.com</small>
+            <small class="profile-guest-handle d-block" th:text="${guest.email}">user@example.com</small>
         </div>
         <div>
             <p class="mb-1 fw-bold">Teacher's Name:</p>
-            <small class="profile-user-handle d-block" th:text="${user.teacherName}">Teacher's Name</small>
+            <small class="profile-guest-handle d-block" th:text="${guest.teacherName}">Teacher's Name</small>
         </div>
         <div>
             <p class="mb-1 fw-bold">Guest Name:</p>
-            <small class="profile-user-handle d-block" th:text="${user.guestName}">Guest Name</small>
+            <small class="profile-guest-handle d-block" th:text="${guest.guestName1}">Guest Name</small>
         </div>
         <div>
             <p class="mb-1 fw-bold">Guest Name:</p>
-            <small class="profile-user-handle d-block" th:text="${user.guestName}">Guest Name</small>
+            <small class="profile-guest-handle d-block" th:text="${guest.guestName2}">Guest Name</small>
         </div>
         <div>
             <p class="mb-1 fw-bold">Guest Name:</p>
-            <small class="profile-user-handle d-block" th:text="${user.guestName}">Guest Name</small>
+            <small class="profile-guest-handle d-block" th:text="${guest.guestName3}">Guest Name</small>
         </div>
         <div>
             <p class="mb-1 fw-bold">Guest Name:</p>
-            <small class="profile-user-handle d-block" th:text="${user.guestName}">Guest Name</small>
+            <small class="profile-guest-handle d-block" th:text="${guest.guestName4}">Guest Name</small>
         </div>
         <!--            <p class="mb-1 fw-bold">Paid:</p>-->
         <!--            <small class="profile-user-handle d-block" th:text="${user.paid ? 'Yes' : 'No'}">Yes</small>-->

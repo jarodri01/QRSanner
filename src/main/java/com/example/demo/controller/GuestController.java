@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.User;
-import com.example.demo.repositories.UserRepository;
+import com.example.demo.model.Guest;
+
+import com.example.demo.repositories.GuestRepository;
+
 import com.example.demo.service.EmailService;
 import com.example.demo.service.QRCodeService;
 import com.google.zxing.WriterException;
@@ -18,27 +20,27 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/guest")
+public class GuestController {
 
-    private final UserRepository userRepository;
+    private final GuestRepository guestRepository;
 
     private final QRCodeService qrCodeService;
 
     private final EmailService emailService;
 
     @Autowired
-    public UserController(UserRepository userRepository, QRCodeService qrCodeService, EmailService emailService) {
-        this.userRepository = userRepository;
+    public GuestController(GuestRepository guestRepository, QRCodeService qrCodeService, EmailService emailService) {
+        this.guestRepository = guestRepository;
         this.qrCodeService = qrCodeService;
         this.emailService = emailService;
     }
 
     @GetMapping("/{id}")
-    public String getUserDetails(@PathVariable Long id, Model model) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            model.addAttribute("user", user.get());
+    public String getGuestDetails(@PathVariable Long id, Model model) {
+        Optional<Guest> guest = guestRepository.findById(id);
+        if (guest.isPresent()) {
+            model.addAttribute("guest", guest.get());
             return "user-details";
         } else {
             return "error";
@@ -47,11 +49,11 @@ public class UserController {
 
     @GetMapping("/generate-qr/{id}")
     public String generateQRCode(@PathVariable Long id, HttpServletResponse response, Model model) throws WriterException, IOException {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
+        Optional<Guest> guest = guestRepository.findById(id);
+        if (guest.isPresent()) {
             String qrCode = qrCodeService.generateQRCode(id);
             model.addAttribute("qrCode", qrCode);
-            model.addAttribute("user", user.get());
+            model.addAttribute("guest", guest.get());
             return "qr-page";
         } else {
             return "error";
@@ -59,19 +61,20 @@ public class UserController {
 
     }
 
+
     @PostMapping("/send-qr/{id}")
     public String sendQRCodeEmail(@PathVariable Long id, Model model) throws WriterException, IOException, MessagingException {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            User currentUser = user.get();
+        Optional<Guest> guest = guestRepository.findById(id);
+        if (guest.isPresent()) {
+            Guest currentGuest = guest.get();
             String qrCode = qrCodeService.generateQRCode(id);
             String logoUrl = "https://res.cloudinary.com/dcehvbp8e/image/upload/v1746408808/Logo_Melrose_ivlz3i.png";
 
-            emailService.sendEmailWithQRCode(currentUser.getEmail(), currentUser.getName(), qrCode, logoUrl);
-            model.addAttribute("message", "Email sent successfully to " + currentUser.getEmail());
+            emailService.sendEmailWithQRCode(currentGuest.getEmail(), currentGuest.getName(), qrCode, logoUrl);
+            model.addAttribute("message", "Email sent successfully to " + currentGuest.getEmail());
             return "email-confirmation";
         } else {
-            model.addAttribute("error", "User not found");
+            model.addAttribute("error", "guest not found");
             return "error";
         }
     }
