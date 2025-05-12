@@ -8,13 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.*;
 import lombok.*;
 
-
-@ToString
-@EqualsAndHashCode
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "Guest")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +28,6 @@ public class User {
     //  private boolean paid;
     // private int tickets;
 
-    public User() {
-    }
 
     public User(String name, String email, String teacherName, String guestName1, String guestName2, String guestName3, String guestName4) {
         this.name = name;
