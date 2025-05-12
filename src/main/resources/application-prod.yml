@@ -8,6 +8,7 @@ spring:
     user:
       name: ${loginUser}
       password: ${loginPassword}
+
   sql:
     init:
       platform: org.postgresql.Driver
