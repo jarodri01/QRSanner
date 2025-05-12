@@ -1,7 +1,10 @@
 package com.example.demo;
 
+import com.example.demo.service.UserService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,5 +23,18 @@ public class TicketScannerApplication {
 
         app.run(args);
     }
+
+    @Bean
+    CommandLineRunner commandLineRunner(UserService userService) {
+        return args -> {
+            try {
+                userService.createUser("admin", "admin");
+            } catch (Exception e) {
+                // User might already exist
+                System.out.println("Admin user already exists");
+            }
+        };
+    }
+
 
 }
