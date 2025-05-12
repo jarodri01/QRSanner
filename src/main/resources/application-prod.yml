@@ -4,6 +4,10 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
+  security:
+    user:
+      name: ${loginUser}
+      password: ${loginPassword}
   sql:
     init:
       platform: org.postgresql.Driver
