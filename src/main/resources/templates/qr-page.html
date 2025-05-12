@@ -35,8 +35,8 @@
         }
     </style>
     <script>
-        function sendEmail(userId) {
-            fetch(`/user/send-qr/${userId}`, {method: 'POST'})
+        function sendEmail(guestId) {
+            fetch(`/guest/send-qr/${guestId}`, {method: 'POST'})
                 .then(response => response.text())
                 .then(message => alert(message))
                 .catch(error => alert('Error sending email: ' + error));
@@ -45,9 +45,9 @@
 </head>
 <body>
 <button onclick="window.location.href='/index'">return home</button>
-<h2>QR Code for <span th:text="${user.name}"></span></h2>
+<h2>QR Code for <span th:text="${guest.name}"></span></h2>
 <img th:src="'data:image/png;base64,' + ${qrCode}" alt="QR Code">
 <p>Scan this QR code to view details.</p>
-<button th:attr="onclick='sendEmail(' + ${user.id} + ')'">Send QR Code via Email</button>
+<button th:attr="onclick='sendEmail(' + ${guest.id} + ')'">Send QR Code via Email</button>
 </body>
 </html>
