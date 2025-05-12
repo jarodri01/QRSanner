@@ -124,7 +124,7 @@
                 <tbody>
                 <tr th:each="upload : ${index}">
                     <td>
-                        <a th:href="@{'/user/generate-qr/' + ${upload.id}}" th:text="${upload.id}"></a>
+                        <a th:href="@{'/guest/generate-qr/' + ${upload.id}}" th:text="${upload.id}"></a>
                     </td>
                     <td th:text="${upload.name}"></td>
                     <td th:text="${upload.email}"></td>
